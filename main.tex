@@ -2,135 +2,59 @@
 \usepackage[utf8]{inputenc}
 \usepackage{myshortcuts}
 \usepackage{a4wide}
-\usepackage{hyperref}
-\usepackage[english]{babel}
 \usepackage{csquotes}
-\usepackage{caption}
+% \usepackage{hyperref}
+\usepackage[english]{babel}
+\usepackage[labelfont=bf]{caption}
 \usepackage[style=mla,backend=biber]{biblatex}
 
 \addbibresource{mysources.bib}
 
+
 \title{
-{\large Mathematics Internal Assessment}\\
+\textbf{Mathematics Internal Assessment}\\
 \bigskip
-How can we model percolation mathematically?
+Is this a good title for the IA?
 }
 \author{Jingjie YANG}
-\date{October 2018}
+\date{}
 
 \begin{document}
 \maketitle
 
-\paragraph{Abstract.}
-The phenomenon of percolation in materials science is described, and a mathematical model of percolation on the square lattice $\Z^2$ is presented, in which each edge has a probability of $p \in [0, 1]$ to be open. Whether infinite components of open edges exist and the critical value $p_c$ at which they appear are then considered. It is firstly shown that there exists a unique infinite component, and $0 < p_c < 1$, before concluding that $p_c = \frac{1}{2}$. 
+\section{Introduction}
+If a large, porous stone is immersed in water for a long time, what is the probability that its centre is wetted? In 1957, Broadbent and Hammersley \autocite*[693]{broadbent_hammersley_1957} formulated a simple stochastic model for this situation, which in two dimensions amounts to a large grid of channels. More specifically, we consider the graph $G = (V, E)$, where the set of vertices $V$ is the square lattice $\Z^2$, and all the edges that connect two neighbouring points $A$ and $B$ on the square lattice, i.e. $\abs{A_x - B_x} + \abs{A_y - B_y} = 1$, constitute the set of edges $E$. We then choose a certain $p \in [0, 1]$, and for each edge (alternatively called \textit{bond}) $e$ in $E$, we declare $e$ to be \textit{open} with probability $p$, and \textit{closed} otherwise with probability $1 - p$ independently of the states of other edges. This model is known as Bernoulli bond percolation.
 
-\section*{Introduction}
+\input{figures/square_lattice.tex}
 
-\begin{figure}[!htb]
-    \centering
-    \minipage{0.32\textwidth}
-    \begin{tikzpicture}
-        \def\p{0.2}
-        \foreach \x in {0,0.33,...,4.63} {
-            \foreach \y in {0,0.33,...,4.63} {
-                \pgfmathparse{rnd}
-                \ifdim\pgfmathresult pt < \p pt\relax 
-                    \draw[red, very thick] (\x, \y) -- (\x, \y + 0.33);
-                \else
-                    \draw[gray] (\x, \y) -- (\x, \y + 0.33);
-                \fi 
-                \pgfmathparse{rnd}
-                \ifdim\pgfmathresult pt < \p pt\relax
-                    \draw[red, very thick] (\x, \y) -- (\x + 0.33, \y);
-                \else
-                    \draw[gray] (\x, \y) -- (\x + 0.33, \y);
-                \fi 
-            }
-            \pgfmathparse{rnd}
-            \ifdim\pgfmathresult pt < \p pt\relax
-                \draw[red, very thick] (\x, 4.95) -- (\x + 0.33, 4.95);
-            \else
-                \draw[gray] (\x, 4.95) -- (\x + 0.33, 4.95);
-            \fi
-            \pgfmathparse{rnd}
-            \ifdim\pgfmathresult pt < \p pt\relax
-                \draw[red, very thick] (4.95, \x) -- (4.95, \x + 0.33);
-            \else
-                \draw[gray] (4.95, \x) -- (4.95, \x + 0.33);
-            \fi
-        }
-    \end{tikzpicture}
-    \caption{$p = 0.2$}
-    \endminipage\hfill
-    \minipage{0.32\textwidth}
-    \begin{tikzpicture}
-        \def\p{0.3}
-        \foreach \x in {0,0.33,...,4.63} {
-            \foreach \y in {0,0.33,...,4.63} {
-                \pgfmathparse{rnd}
-                \ifdim\pgfmathresult pt < \p pt\relax 
-                    \draw[red, very thick] (\x, \y) -- (\x, \y + 0.33);
-                \else
-                    \draw[gray] (\x, \y) -- (\x, \y + 0.33);
-                \fi 
-                \pgfmathparse{rnd}
-                \ifdim\pgfmathresult pt < \p pt\relax
-                    \draw[red, very thick] (\x, \y) -- (\x + 0.33, \y);
-                \else
-                    \draw[gray] (\x, \y) -- (\x + 0.33, \y);
-                \fi 
-            }
-            \pgfmathparse{rnd}
-            \ifdim\pgfmathresult pt < \p pt\relax
-                \draw[red, very thick] (\x, 4.95) -- (\x + 0.33, 4.95);
-            \else
-                \draw[gray] (\x, 4.95) -- (\x + 0.33, 4.95);
-            \fi
-            \pgfmathparse{rnd}
-            \ifdim\pgfmathresult pt < \p pt\relax
-                \draw[red, very thick] (4.95, \x) -- (4.95, \x + 0.33);
-            \else
-                \draw[gray] (4.95, \x) -- (4.95, \x + 0.33);
-            \fi
-        }
-    \end{tikzpicture}
-    \caption{$p = 0.3$}
-    \endminipage\hfill
-    \minipage{0.32\textwidth}
-    \begin{tikzpicture}
-        \def\p{0.6}
-        \foreach \x in {0,0.33,...,4.63} {
-            \foreach \y in {0,0.33,...,4.63} {
-                \pgfmathparse{rnd}
-                \ifdim\pgfmathresult pt < \p pt\relax 
-                    \draw[red, very thick] (\x, \y) -- (\x, \y + 0.33);
-                \else
-                    \draw[gray] (\x, \y) -- (\x, \y + 0.33);
-                \fi 
-                \pgfmathparse{rnd}
-                \ifdim\pgfmathresult pt < \p pt\relax
-                    \draw[red, very thick] (\x, \y) -- (\x + 0.33, \y);
-                \else
-                    \draw[gray] (\x, \y) -- (\x + 0.33, \y);
-                \fi 
-            }
-            \pgfmathparse{rnd}
-            \ifdim\pgfmathresult pt < \p pt\relax
-                \draw[red, very thick] (\x, 4.95) -- (\x + 0.33, 4.95);
-            \else
-                \draw[gray] (\x, 4.95) -- (\x + 0.33, 4.95);
-            \fi
-            \pgfmathparse{rnd}
-            \ifdim\pgfmathresult pt < \p pt\relax
-                \draw[red, very thick] (4.95, \x) -- (4.95, \x + 0.33);
-            \else
-                \draw[gray] (4.95, \x) -- (4.95, \x + 0.33);
-            \fi
-        }
-    \end{tikzpicture}
-    \caption{$p = 0.6$}
-    \endminipage\hfill
-\end{figure}
+The edges represent the inner passageways of the stone, where open edges let water through and closed ones block the flow. Water reaches the centre of the stone if and only if the origin is in a connected component of open edges touching the boundary of the stone. It is not unreasonable to assume that the fine structure of the interior channels is on a negligible scale compared to the overall size of the stone. We are then interested in knowing whether the origin belongs to a connected component of infinitely many vertices, also called an \textit{infinite cluster}. 
+
+Apart from $p = 0$ where the stone is entirely impermeable, and $p = 1$ where without doubt water flows past the origin, to have an idea of how the model behaves at other nontrivial values of $p$, we can contemplate computer simulations:
+
+\input{figures/percolations_gallery.tex}
+\break 
+
+Readers with good eyesight may bother to check that for $p = 0.6$, there is a path of open edges (in red) connecting the left and right sides, whereas such is not the case for $p = 0.2$ and $p = 0.3$ where the connected components are isolated. Is there a value of the parameter $p$ at which infinite clusters emerge? Can we compute this critical value of $p$? When they appear, how many infinite clusters are there precisely?
+
+What is described above forms the basis of the study of percolation theory. Since its birth in 1957 due to Broandbent and Hammersley \autocite*[693]{broadbent_hammersley_1957}, the field has attracted pure mathematicians and scientists. Despite its simplicity, the percolation model accounts for the behaviour of many natural systems ranging from the flow of fluids through a disordered porous medium and ferromagnetism of materials to the spread of forest fires and epidemics \autocite[60]{gennes_2000}. Nevertheless, the first major mathematical result was not announced until only some twenty years later: in 1980, Kesten \autocite*[41]{kesten_1980} completed Harris and Lindley's \autocite*[13]{harris_lindley_1960} 1960 work to prove that the critical probability on the square lattice is equal to $\frac{1}{2}$. In the last two decades, there has been spectacular progress in our understanding of two-dimensional percolation due to Smirnov's \autocite*[239]{smirnov_2001} proof of the conformal invariance on the hexagonal lattice, for which he received the Fields Medal in 2010.
+
+To answer the questions raised above about the existence of the critical probability on the square lattice and the number of infinite clusters, we will firstly introduce a few probabilistic notions to allow for a rigorous discussion.
+
+\section{Probabilistic Tools}
+
+\begin{lem}[Boole's inequality]
+$n \in \N, P(A_1 \cup A_2 \cup \cdots \cup A_n) \leq P(A_1) + P(A_2) + \cdots + P(A_n)$
+\end{lem}
+\begin{proof}[Proof]
+By induction.
+
+\end{proof}
+
+
+\section{Conclusion}
+\begin{quotation}
+``Quite apart from the fact that percolation theory had its origin in an honest applied problem, it is a source of fascinating problems of the best kind a mathematician can wish for: problems which are easy to state with a minimum of preparation, but whose solutions are (apparently) difficult and require new methods.''
+\end{quotation}
 
 \nocite{*}
 \printbibliography
