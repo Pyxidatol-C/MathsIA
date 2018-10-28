@@ -88,20 +88,13 @@ Using the definition from Example~\ref{ex:cluster_of_size_n}, for integers $m$ a
 \end{cor}
 We also use $\theta(p)$ to refer to the probability that there is an infinite cluster at the origin as a function of $p$.
 
-\section{Critical Value on the Square Lattice}
-To start with, we want to know for which values of $p$ there is no infinite cluster on the square lattice, i.e., $\theta(p) = 0$. We do this by finding a upper bound on $\theta(p)$.
+\section{Percolation on the Square Lattice}
+\subsection{No Infinite Clusters}
+To start with, we want to know for which values of $p$ there is no infinite cluster on the square lattice, i.e., $\theta(p) = 0$.
 
-\begin{prop}\label{prop:self_avoiding_path}
-For positive integer $n$, we have $\abs{C} \geq n$ if and only if there is a \textit{self-avoiding path} of length $n$ of open edges from $O$.
-\end{prop}
-\begin{proof}
-Recall that a self-avoiding path of length $n$ is a sequence $v_1, v_1, \dots, v_n$
-\end{proof}
-
-\begin{prop}% number path
-
-\end{prop}
-
+Let $n$ be a nonnegative integer, and let $\Omega_n$ be the set of all self-avoiding paths of length $n$ departing from the origin. Corollary~\ref{cor:inf_cluster} tells us that
+\[\theta(p) = \lim_{n \to \infty} \P(\bigcup_{\gamma \in \Omega_n} \text{all edges of the path } \gamma \text{ are open}).\]
+We can then find an upper bound on $\theta(p)$ with the help of the following lemma.
 
 \begin{lem}[Boole's inequality]\label{lem:union_bound}
 $\P(A_1 \cup A_2 \cup \cdots \cup A_n) \leq \P(A_1) + \P(A_2) + \cdots + \P(A_n)$
@@ -122,6 +115,44 @@ Since $P(\bigcup_{i = 1}^{k} A_i \cap A_{k + 1}) \geq 0$, we can conclude that $
 \end{description}
 By the principle of mathematical induction, $\mathcal{P}(n)$ is true for any $n \in \N$.
 \end{proof}
+
+It follows that
+\[\theta(p) \leq \lim_{n \to \infty} \sum_{\gamma \in \Omega_n} \P(\text{all edges of the path } \gamma \text{ are open}).\]
+
+\begin{prop}
+$\P(\text{all edges of } \gamma \text{ are open}) = p^n$ for all path $\gamma \in \Omega_n$.
+\end{prop}
+\begin{proof}
+By the definition of the set $\Omega_n$, the self-avoiding path $\gamma$ contains $n$ distinct edges. Furthermore, each edge $e$ in $\gamma$ is defined to independently be open with probability $p$. Thus, the probability that all edges of the given path is open is $\prod_{e \in \gamma} p = p^n$.
+\end{proof}
+
+\begin{prop}
+There are at most $4 \cdot 3^{n - 1}$ self-avoiding paths in $\Omega_n$.
+\end{prop}
+
+\input{figures/nb_self_avoiding_paths.tex}
+
+\begin{proof}
+Using the reasoning from Figure~\ref{fig:nb_self_avoiding_path} above, we can deduce that $\abs{\Omega_n} \leq 4 \times 3^{n - 1}$.
+\end{proof}
+
+Although we have only obtained a very crude bound on the number of paths in $\Omega_n$, we can still conclude that
+\begin{align*}
+    \theta(p)
+    &\leq \lim_{n \to \infty} \sum_{\gamma \in \Omega_n} p^n\\
+    &\leq \lim_{n \to \infty} (4 \cdot 3^{n - 1}) p^n\\
+    &= \dfrac{4}{3} \lim_{n \to \infty} (3p)^{n - 1}
+\end{align*}
+which tends toward 0 if $3p < 1$.
+
+\begin{thm}
+If $p < \dfrac{1}{3}$, then $\theta(p) = 0$.
+\end{thm}
+\begin{proof}
+As shown above, $p < \frac{1}{3}$ implies $\theta(p) \leq 0$. But since $\theta(p) \geq 0$ as a probability, $\theta(p) = 0$. As a result, there is no infinite cluster on the square lattice if $p < \frac{1}{3}$.
+\end{proof}
+
+% \subsection{Yes Infinite Clusters}
 
 \section{Critical Value on the Cubic Lattice}
 
