@@ -14,6 +14,17 @@
 \RequirePackage[capitalise, nameinlink]{cleveref}
 
 %--------Theorem Environments--------
+\makeatletter
+\def\th@plain{%
+  \thm@notefont{}% same as heading font
+  \itshape % body font
+}
+\def\th@definition{%
+  \thm@notefont{}% same as heading font
+  \normalfont % body font
+}
+\makeatother
+
 \newtheorem{thm}{Theorem}
 \newtheorem{cor}[thm]{Corollary}
 \newtheorem{prop}[thm]{Proposition}
@@ -33,6 +44,8 @@
 
 \newenvironment{sproof}{%
   \renewcommand{\proofname}{Sketch of Proof}\proof}{\endproof}
+\newenvironment{hproof}{%
+  \renewcommand{\proofname}{Heuristic Proof}\proof}{\endproof}
 
 
 %-------Tikz Tree Graph Settings------
@@ -46,14 +59,6 @@
   core/.style     = {circle, inner sep = 0pt, outer sep = -0.5pt, fill=black,draw},
   corelabel/.style = {dummy,right = 0.07in}
 }
-
-%-------Tikz Plot Points Settings------
-\tikzset{
-  jumpdot/.style={mark=*,solid},
-  excl/.append style={jumpdot,fill=white},
-  incl/.append style={jumpdot,fill=black},
-}
-
 
 %-------Custom Commands--------
 

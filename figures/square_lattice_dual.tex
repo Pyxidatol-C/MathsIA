@@ -10,7 +10,7 @@
         
         \foreach \i in {0.5, 1.5, ..., 3.5} {
             \foreach \j in {0.5, 1.5, ..., 3.5} {
-                \filldraw (\i, \j) circle (1pt);
+                \filldraw[orange] (\i, \j) circle (2.0pt);
             }
         }
         
@@ -46,6 +46,6 @@
         \draw[blue, very thick] (3.5, 2.5) -- (3.5, 0.5);
         
     \end{tikzpicture}
-    \caption{A percolation sample on the square lattice (red) and its dual (blue)}
+    \caption{A percolation realisation on a $5 \times 5$ section of the square lattice and its dual}
     \label{fig:square_lattice_dual}
 \end{figure}
