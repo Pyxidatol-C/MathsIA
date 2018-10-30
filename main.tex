@@ -35,7 +35,7 @@ Apart from $p = 0$ where the stone is entirely impermeable, and $p = 1$ where wa
 
 Readers with good eyesight may bother to check that for $p = 0.6$, there is a path of open edges (in red) connecting the left and right sides, whereas such is not the case for $p = 0.2$ and $p = 0.3$ where the connected components are isolated. Is there a value of the parameter $p$ at which infinite clusters emerge? Can we compute this critical value of $p$? Is the critical value different for the cubic lattice $\Z^3$?
 
-What is described above forms the basis of percolation theory. Since its birth in 1957 due to Broandbent and Hammersley \autocite*[693]{broadbent_hammersley_1957}, the field has attracted pure mathematicians and scientists from myriad domains. Despite its simplicity, the percolation model accounts for the behaviour of many natural systems --- ranging from the flow of fluids through a disordered porous medium and conductivity of materials to the spread of forest fires and epidemics \autocite[60]{gennes_2000}. Nevertheless, the first major mathematical result was not announced until only some twenty years later: in 1980, Kesten \autocite*[41]{kesten_1980} completed Harris and Lindley's \autocite*[13]{harris_lindley_1960} 1960 work to prove that the critical probability on the square lattice is equal to $\frac{1}{2}$. In the last two decades, there has been remarkable progress in our understanding of two-dimensional percolation due to Smirnov's \autocite*[239]{smirnov_2001} proof of the conformal invariance on the hexagonal lattice, for which he was awarded the Fields Medal in 2010.
+What is described above forms the basis of percolation theory. Since its birth in 1957 due to Broandbent and Hammersley \autocite*[693]{broadbent_hammersley_1957}, the field has attracted pure mathematicians and scientists from myriad domains. Despite its simplicity, the percolation model accounts for the behaviour of many natural systems --- ranging from the flow of fluids through a disordered porous medium and conductivity of materials to the spread of forest fires and epidemics \autocite[60]{gennes_2000}. Nevertheless, the first major mathematical result was not announced until only some twenty years later: in 1980, Kesten \autocite*[41]{kesten_1980} completed Harris's \autocite*[13]{harris_lindley_1960} 1960 work to prove that the critical probability on the square lattice is equal to $\frac{1}{2}$. In the last two decades, there has been remarkable progress in our understanding of two-dimensional percolation due to Smirnov's \autocite*[239]{smirnov_2001} proof of the conformal invariance on the hexagonal lattice, for which he was awarded the Fields Medal in 2010.
 
 To answer the questions raised above about the existence of the critical probability on the square and cubic lattices, we will firstly acquaint ourselves with a few notions in probability to allow for a rigorous discussion of the subject.
 
@@ -154,7 +154,7 @@ As a result, there is no infinite cluster on the square lattice if $p < \frac{1}
 \subsection{Infinite Clusters}\label{subsec:inf_cluster}
 Then, we are interested in knowing for which values of $p$ (other than $p = 1$) there exists an infinite cluster, i.e.\ $\theta(p) > 0$.
 
-This time, we will be employing a more elaborated method that is often called a \textit{Peierls argument}. It is named after the British physicist \autocite[477]{peierls_1936} who proved a phase transition --- the change of macroscopic behaviour as the parameter varies, e.g.\ the appearance of an infinite cluster --- for the Ising model, another probabilistic model in statistical physics that explains the phenomenon of ferromagnetism. The gist is that, instead of trying to find a direct lower bound on $\theta(p)$, we establish an upper bound on $1 - \theta(p)$ using a variant of the technique from the previous section. The method revolves around the \textit{dual graph} $\left(\Z^2\right)^*$, a key notion that we will introduce now.
+This time, we will be employing a more elaborated method that is often called a \textit{Peierls argument}. It is named after the British physicist who proved a phase transition --- the change of macroscopic behaviour as the parameter varies, e.g.\ the appearance of an infinite cluster --- for the Ising model, another probabilistic model in statistical physics that explains the phenomenon of ferromagnetism. The gist is that, instead of trying to find a direct lower bound on $\theta(p)$, we establish an upper bound on $1 - \theta(p)$ using a variant of the technique from the previous section. The method revolves around the \textit{dual graph} $\left(\Z^2\right)^*$, a key notion that we will introduce now.
 
 \begin{defn}\label{defn:dual_graph}
 Given a planar graph $G$, we define its \textit{dual graph} $G^*$ in a way that:
@@ -298,12 +298,23 @@ We can see from \cref{fig:z3_dual} above that the dual of a cube is a regular oc
 Nevertheless, it is enough to make the simple remark that any percolation on $\Z^3$ contains a copy of percolation on $\Z^2$, since each ``layer'' of the cubic lattice is a copy of the square lattice. Consequently, when $p > \frac{1}{2}$ --- the critical probability on $\Z^2$ as stated in \cref{thm:pc_eq_one_half_kesten}, there exists an infinite cluster on $\Z^2$  and therefore also on $\Z^3$. We conclude that $p_c \leq \frac{1}{2}$ on the cubic lattice.
 \end{proof}
 
+\begin{rem*}
+It has been numerically determined that $p_c \simeq 0.24881182$ for percolation on $\Z^3$ \autocite[1]{zhou_2014}. This value is consistent with what we established in \cref{thm:pc_on_Z3}.
+\end{rem*}
+
 \section{Conclusion}
+In this investigation, we have studied the critical probability for percolation on $\Z^2$ and $\Z^3$.
+
+One possible way to further the investigation is to consider the values of $p_c$ on other kinds of graphs. These include trees of a fixed number of branches and triangular lattices. The former is linked to genealogical trees, and it has been mathematically shown that the probability of extinction of family names is $93\%$ \autocite[]{gennes_2000} for instance. In addition, for large values of $d$, the lattice $\Z^d$ often behaves in a similar manner to trees concerning infinite clusters \autocite[]{gennes_2000}. Studies of the latter has taken this idea of similarity between different graphs even further to suggest that properties of percolation are conserved under certain transformations. Smirnov's proof of Cardy's formula \autocite*[1]{smirnov_2001} has sparked a recent interest in this area. Furthermore, out of physical interests, more complex models of percolation have been formulated. For example, directed edges are considered, whose opening depends on the state of its neighbours.
+
+Another direction to pursue is a closer study of how the percolation model behaves. At the same time as the notion of the critical probability allows us to understand the macroscopic behaviour concerning the existence of infinite clusters, more questions arise: when $p > p_c$, is the infinite cluster unique? (\textit{Spoiler alert:} it is.) When $p = p_c$, does an infinite cluster exist? Kesten \autocite[1]{kesten_1980} has shown that for bond percolation on $\Z^2$, it is true that $\theta(p) = 0$. It remains an open question whether such is the case for lattices in higher dimensions, as when $p$ approaches $p_c$, the percolation system becomes fractal.
+
+We shall now return to the mathematical model itself, which is abstract in nature but applicable to many realistic problems. These ideas are perhaps best summed up by Kesten:
+
 \begin{quotation}
 ``Quite apart from the fact that percolation theory had its origin in an honest applied problem, it is a source of fascinating problems of the best kind a mathematician can wish for: problems which are easy to state with a minimum of preparation, but whose solutions are (apparently) difficult and require new methods.''
 \end{quotation}
 
-\nocite{*}
 \printbibliography
 
 \end{document}
