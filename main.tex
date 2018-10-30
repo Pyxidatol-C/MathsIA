@@ -143,7 +143,7 @@ Although we have only obtained a very crude bound on the number of paths in $\Om
     \theta(p)
     &\leq \lim_{n \to \infty} \sum_{\gamma \in \Omega_n} p^n\\
     &\leq \lim_{n \to \infty} \left(4 \cdot 3^{n - 1}\right) p^n\\
-    &= \dfrac{4}{3} \lim_{n \to \infty} (3p)^{n - 1}
+    &= \dfrac{4}{3} \lim_{n \to \infty} (3p)^n
 \end{align*}
 
 The limit tends toward 0 if $\abs{3p} < 1$. Then, $p < \frac{1}{3}$ implies $\theta(p) \leq 0$. But since $\theta(p) \geq 0$ as a probability, we have $\theta(p) = 0$.
@@ -194,7 +194,7 @@ Recall from graph theory that a cycle has no repeated edges or repeated vertices
 If $p > 0.762$, then $\theta(p) > 0$.
 \end{thm}
 \begin{proof}
-We begin by finding an upper bound for the probability that $\abs{C}$ is finite.
+We begin by finding an upper bound on the probability that $\abs{C}$ is finite.
 \begin{align}
     \P(\abs{C} < \infty)
     &= \lim_{N \to \infty} \P\left(\bigcup_{n = 0}^N \exists\,\text{cycle surrounding the origin passing by } (n + \frac{1}{2}, \frac{1}{2})\right)\label{eq:union_exists_cycle}\\
@@ -203,7 +203,7 @@ We begin by finding an upper bound for the probability that $\abs{C}$ is finite.
     &\leq \lim_{N \to \infty} \sum_{n = 0}^N \sum_{\gamma \in \Omega_{2n + 3}} \P(\text{all edges of the path } \gamma \text{ are open})\label{eq:sum_sum_path_open}\\
     &\leq \lim_{N \to \infty} \sum_{n = 0}^N (4 \cdot 3^{2n + 2}) (1 - p)^{2n + 3}\label{eq:sum_path_open}
 \end{align}
-We start by using the equivalence between the event $\{\abs{C} < \infty\}$ and the existence of a cycle in $(\Z^2)^*$ around the origin stated in \cref{prop:c_finite_iff_cycle} to establish \cref{eq:union_exists_cycle}. Next, \cref{lem:union_bound} allows us to express the probability of a union of events as the sum of the probabilities of the events in \cref{eq:sum_exists_cycle}. Before passing to \cref{eq:sum_union_exists_path}, we need to make several observations. Firstly, we can apply \cref{lem:event_subseteq}, which allows the probability of an event to be bounded from above by the probability of another event that it implies, to find an upper bound for the probability of such cycles existing using the probability of that self-avoiding paths of a certain length exist by \cref{prop:cylce_implies_path}. In addition, the number of such paths does not depend on the starting vertex, whether it is the origin or an arbitrary $(n + \frac{1}{2}, \frac{1}{2})$; we can thus use the set $\Omega_{2n + 3}$ from \cref{subsec:no_inf_cluster}. Now, the reader should be familiar with the remaining steps, since we almost replicated them from the proof of \cref{thm:pc_lower_bound}. To derive \cref{eq:sum_sum_path_open}, we again leverage \cref{lem:union_bound} to rid of the union. Finally, in \cref{eq:sum_path_open}, we expand the sum with the upper bound on $\abs{\Omega_{2n + 3}}$ that we established in \cref{prop:nb_paths_len_n}. The only difference is that in $(\Z^2)^*$, each edge is open with probability $1 - p$ as defined in \cref{ex:dual_lattice}; we simply need to adapt \cref{prop:p_path_all_open} so that $1 - p$ is considered as the parameter instead.
+We start by using the equivalence between the event $\{\abs{C} < \infty\}$ and the existence of a cycle in $(\Z^2)^*$ around the origin stated in \cref{prop:c_finite_iff_cycle} to establish \cref{eq:union_exists_cycle}. Next, \cref{lem:union_bound} allows us to express the probability of a union of events as the sum of the probabilities of the events in \cref{eq:sum_exists_cycle}. Before passing to \cref{eq:sum_union_exists_path}, we need to make several observations. Firstly, we can apply \cref{lem:event_subseteq}, which allows the probability of an event to be bounded from above by the probability of another event that it implies, to find an upper bound on the probability of such cycles existing using the probability of that self-avoiding paths of a certain length exist by \cref{prop:cylce_implies_path}. In addition, the number of such paths does not depend on the starting vertex, whether it is the origin or an arbitrary $(n + \frac{1}{2}, \frac{1}{2})$; we can thus use the set $\Omega_{2n + 3}$ from \cref{subsec:no_inf_cluster}. Now, the reader should be familiar with the remaining steps, since we almost replicated them from the proof of \cref{thm:pc_lower_bound}. To derive \cref{eq:sum_sum_path_open}, we again leverage \cref{lem:union_bound} to rid of the union. Finally, in \cref{eq:sum_path_open}, we expand the sum with the upper bound on $\abs{\Omega_{2n + 3}}$ that we established in \cref{prop:nb_paths_len_n}. The only difference is that in $(\Z^2)^*$, each edge is open with probability $1 - p$ as defined in \cref{ex:dual_lattice}; we simply need to adapt \cref{prop:p_path_all_open} so that $1 - p$ is considered as the parameter instead.
 
 We continue by considering the limit
 \begin{align*}
@@ -220,11 +220,10 @@ The geometric series only converges when $\abs{9 (1 - p)^2} < 1$, i.e., when $-\
 
 As shown in \cref{fig:pc_upper_bound_plot} above, graphically we can determine that for $p > 0.762$, \[\P(\abs{C} < \infty) \leq \frac{36(1 - p)^3}{1 - 9(1 - p)^2} < 1.\]
 
-Note that the event $\{\abs{C} < \infty\}$ is the complement of the event $\{\abs{C} < \infty\}$, and hence
-\begin{align*}
-    \theta(p) &= \P(\abs{C} = \infty) = 1 - \P(\abs{C} < \infty)\\
-    \P(\abs{C} < \infty) &= 1 - \theta(p).
-\end{align*}
+Note that the event $\{\abs{C} < \infty\}$ is the complement of the event $\{\abs{C} = \infty\}$, and hence
+\[
+    \P(\abs{C} < \infty) = 1 - \P(\abs{C} = \infty) = 1 - \theta(p).
+\]
 
 We can now conclude that
 \begin{align*}
@@ -236,7 +235,7 @@ when $p > 0.762$.
 
 In consequence, there exists an infinite cluster on the square lattice if $p > 0.762$.
 
-\subsection{Critical Value}\label{subsec:pc}
+\subsection{The Critical Value}\label{subsec:pc}
 Having seen how there is no infinite cluster on the square lattice when $p$ is close to $0$ and how there exists an infinite cluster when $p$ is close to $1$, via both computer simulations and mathematical proofs, it is now natural to define the critical probability $p_c$.
 
 \begin{defn}\label{defn:pc}
@@ -264,20 +263,40 @@ It makes intuitive sense that as $p$ varies, the macroscopic behaviour of the pe
 \end{hproof}
 
 \section{Percolation on the Cubic Lattice}
-Blah blah blah why we are interested in the cubic lattice
+\subsection{The Cubic Lattice}
+We can define the \textit{(simple) cubic lattice} $\Z^3$ in a similar fashion to the square lattice $\Z^2$: all the points that have integer coordinates $(x, y, z)$ constitute the set of vertices, and all the edges that connect two neighbouring points $A$ and $B$ on the cubic lattice, i.e., $\abs{A_x - B_x} + \abs{A_y - B_y} + \abs{A_z - B_z} = 1$, compose the set of edges. We use the same definition of the event $\{\abs{C} = \infty\}$ in terms of the existence of an arbitrarily long self-avoiding path.
 
-[Paths in the cubic lattice]
+As with $\Z^2$, our interest lies in computing the value of the critical probability $p_c$ for $\Z^3$. We shall see how our work on the square lattice case will help us with proving a similar result on the cubic lattice, which in addition is closer to reality for modelling purposes.
 
-[Cubic lattice contains $\Z^2$]
-
-[Blah blah]
+\subsection{The Critical Value}
+\begin{thm}\label{thm:pc_on_Z3}
+For Bernoulli bond percolation on $\Z^3$, we have $\dfrac{1}{5} \leq p_c \leq \dfrac{1}{2}$.
+\end{thm}
+\begin{proof}
+Firstly, we use the reasoning from \cref{subsec:no_inf_cluster} to prove that $p_c > \frac{1}{5}$. For a positive integer $n$, let $\Omega_n$ denote the set of self-avoiding paths of length $n$ starting from the origin.
 
 \input{figures/z3_paths.tex}
 
-\begin{quest}\label{q:pc_on_Z3}
+As shown in \cref{fig:z3_paths} above, there are at most $6 \cdot 5^{n - 1}$ paths in $\Omega_n$. Furthermore, for any path in $\Omega_n$, the probability that all its $n$ edges are open equals $p^n$.
 
-\end{quest}
+\begin{align*}
+    \theta(p) 
+    &= \lim_{n \to \infty} \P(\bigcup_{\gamma \in \Omega_n} \text{all the } n \text{ edges of } \gamma \text{ are open})\\
+    &\leq \lim_{n \to \infty} \sum_{\gamma \in \Omega_n} p^n\\
+    &\leq \lim_{n \to \infty} \left(6 \cdot 5^{n - 1}\right) p^n\\
+    &= \lim_{n \to \infty} \frac{6}{5} (5 p)^{n}
+\end{align*}
 
+The limit tends to 0 if $\abs{5p} < 1$. As such, if $p < \frac{1}{5}$, then $\theta(p) = 0$. Then, by the definition of $p_c$, we can deduce that $p_c \geq \frac{1}{5}$.
+
+Next, to show that $p_c \leq \frac{1}{2}$, one might be attempted to invoke the dual graph argument from \cref{subsec:inf_cluster}. Let us take a moment to consider what the dual graph of the cubic lattice would look like. Call to mind that we place a vertex for each face of $\Z^3$, and an edge for each edge of $\Z^3$ separating two faces.
+
+\input{figures/z3_dual.tex}
+
+We can see from \cref{fig:z3_dual} above that the dual of a cube is a regular octahedron. Moreover, consider the top vertex of the octahedron. It corresponds to the top face of the cube, whose $4$ edges each separate it from $3$ other faces. As a result, the top vertex in the dual graph is connected to $12$ other vertices, while in $\Z^3$ each vertex is connected to only $6$ neighbours. Clearly, the cubic lattice is not isomorphic to its dual. As a direct consequence, we cannot identify a one-to-one correspondence between the edges of $\Z^3$ and of $(\Z^3)^*$ to imitate how we exploited the properties of $(\Z^2)^*$ to find an upper bound on $p_c$. In fact, the self-duality of the square lattice is a very peculiar characteristic for graphs that already hints at how $p_c$ is exactly $\frac{1}{2}$ on $\Z^2$.
+
+Nevertheless, it is enough to make the simple remark that any percolation on $\Z^3$ contains a copy of percolation on $\Z^2$, since each ``layer'' of the cubic lattice is a copy of the square lattice. Consequently, when $p > \frac{1}{2}$ --- the critical probability on $\Z^2$ as stated in \cref{thm:pc_eq_one_half_kesten}, there exists an infinite cluster on $\Z^2$  and therefore also on $\Z^3$. We conclude that $p_c \leq \frac{1}{2}$ on the cubic lattice.
+\end{proof}
 
 \section{Conclusion}
 \begin{quotation}

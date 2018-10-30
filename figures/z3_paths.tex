@@ -1,7 +1,32 @@
-\begin{figure}
+\begin{figure}[!ht]
+    \centering
+    \caption{Enumeration of self-avoiding paths in $\Z^3$}
+    \label{fig:z3_paths}
+    \minipage{0.5\textwidth}
     \centering
     \begin{tikzpicture}
+        \filldraw (0, 0) circle (1.5pt);
+        \draw[->, thick] (0, 0) -- (2, 0);
+        \draw[->, thick] (0, 0) -- (0, 2);
+        \draw[->, thick] (0, 0) -- (-2, 0);
+        \draw[->, thick] (0, 0) -- (0, -2);
+        \draw[->, thick] (0, 0) -- (-1, -1);
+        \draw[->, thick] (0, 0) -- (1, 1);
     \end{tikzpicture}
-    \caption{Caption}
-    \label{fig:z3_paths}
+    \caption*{$6$ choices for the first step}
+    \endminipage\hfill
+    % --
+    \minipage{0.5\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \draw[|->, very thick, red, dashed] (0, -2) -- (0, 0);
+        
+        \draw[->, thick] (0, 0) -- (2, 0);
+        \draw[->, thick] (0, 0) -- (0, 2);
+        \draw[->, thick] (0, 0) -- (-2, 0);
+        \draw[->, thick] (0, 0) -- (-1, -1);
+        \draw[->, thick] (0, 0) -- (1, 1);
+    \end{tikzpicture}
+    \caption*{$5$ choices for any step that follows}
+    \endminipage
 \end{figure}
