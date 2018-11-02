@@ -9,7 +9,7 @@
 
 \addbibresource{mysources.bib}
 
-% 3011 words
+% 3006 words
 \title{
 \textbf{Mathematics Internal Assessment}\\
 \bigskip
@@ -26,16 +26,16 @@ If a large, porous stone is immersed in water for a long time, what is the proba
 
 \input{figures/square_lattice.tex}
 
-The edges represent the inner passageways of the stone, where open edges let water through and closed ones block the flow; water reaches the centre of the stone if and only if the origin is in a connected component of open edges touching the boundary of the stone. In addition, it is not unreasonable to assume that the fine structure of the interior channels is on a negligible scale compared to the overall size of the stone. We are then interested in knowing whether the origin belongs to a connected component of infinitely many vertices, also called an \textit{infinite cluster}. 
+The edges represent the inner passageways of the stone, where open edges let water through and closed ones block the flow; water reaches the centre of the stone if and only if the origin is in a connected component of open edges touching the boundary of the stone. In addition, it is not unreasonable to assume that the fine structure of the channels is on a negligible magnitude compared to the entire stone. We are then interested in knowing whether the origin belongs to a connected component of infinitely many vertices, also called an \textit{infinite cluster}. 
 
 Apart from $p = 0$ where the stone is entirely impermeable, and $p = 1$ where water flows surely past the origin, to have an idea of how the model behaves at other nontrivial values of $p$, we can contemplate computer simulations of a finite section of the square lattice:
 
 \input{figures/percolations_gallery.tex}
-\break 
+\break
 
 Readers with good eyesight may bother to check that for $p = 0.6$, there is a path of open edges (in red) connecting the left and right sides, whereas such is not the case for $p = 0.2$ and $p = 0.3$ where the connected components are isolated. Is there a value of the parameter $p$ at which infinite clusters emerge? Can we compute this critical value of $p$? Is the critical value different for the cubic lattice $\Z^3$? 
 
-What is described above forms the basis of percolation theory. Since its birth in 1957 due to Broadbent and Hammersley \autocite*[693]{broadbent_hammersley_1957}, the field has attracted pure mathematicians and scientists from myriad domains. Despite its simplicity, the percolation model accounts for the behaviour of many natural systems --- ranging from the flow of fluids through a disordered porous medium and conductivity of materials to the spread of forest fires and epidemics \autocite[60]{gennes_2000}. Nevertheless, the first major mathematical result was not announced until only some twenty years later: in 1980, Kesten \autocite*[41]{kesten_1980} completed Harris's 1960 work \autocite*[13]{harris_1960} to ascertain the value of the critical probability on the square lattice. In the recent decades, with the development of new computational and mathematical techniques, there has been remarkable progress in our understanding of two-dimensional percolation. I am drawn to this exotic topic because it reveals how maths is related to other disciplines.
+What is described above forms the basis of percolation theory. It may appear to be an exotic topic of probability; however, since its birth in 1957 due to Broadbent and Hammersley \autocite*[693]{broadbent_hammersley_1957}, the field has attracted pure mathematicians and scientists from myriad domains. Despite its simplicity, the percolation model accounts for the behaviour of many natural systems --- ranging from the flow of fluids through a disordered porous medium and conductivity of materials to the spread of forest fires and epidemics \autocite[60]{gennes_2000}. Nevertheless, the first major mathematical result was not announced until only some twenty years later: in 1980, Kesten \autocite*[41]{kesten_1980} completed Harris's 1960 work \autocite*[13]{harris_1960} to ascertain the value of the critical probability on the square lattice. Nowadays, percolation theory is a growing field that interconnects maths, physics, and computer science. Very delighted to discover the connections between my favourite disciplines, I did extensive research on this topic.
 
 To answer the questions raised above about the existence of the critical probability on the square and cubic lattices, we will firstly acquaint ourselves with a few notions in probability in order to initiate a rigorous discussion of the subject.
 
@@ -129,8 +129,8 @@ By the definition of the set $\Omega_n$, the self-avoiding path $\gamma$ contain
 \begin{prop}\label{prop:nb_paths_len_n}
 There are at most $4 \cdot 3^{n - 1}$ self-avoiding paths in $\Omega_n$.
 \end{prop}
-\begin{proof}
 \input{figures/nb_self_avoiding_paths.tex}
+\begin{proof}
 Using the reasoning from \cref{fig:nb_self_avoiding_path} above, we can deduce that $\abs{\Omega_n} \leq 4 \times 3^{n - 1}$.
 \end{proof}
 
@@ -178,7 +178,7 @@ Let $\{\abs{C} < \infty\}$ denote the event that the cluster $C$ at the origin c
 $\abs{C} < \infty$ if and only if there exists a cycle of open edges in $(\Z^2)^*$ surrounding $O$. Also, the cycle passes by the point $(n + \frac{1}{2}, \frac{1}{2})$ for some nonnegative $n$.
 \end{prop}
 
-This is a result from pure graph theory. We will not present the rigorous proof due to Grimmett \autocite*[14--15]{grimmett_1999} here, but the reader should be able to convince him/herself that this proposition is very believable simply by drawing some pictures. Indeed, a cycle of open edges in $(\Z^2)^*$ blocks all open edges of $\Z^2$ connecting the interior and the exterior of the circuit. The cluster $C$ is then confined inside the cycle, and therefore can only contain finitely many vertices. In addition, for the cycle to surround the origin, it must intersect the line $y = \frac{1}{2}$ (which lies right above the origin) on the right, i.e., at a nonnegative $x$.
+This is a result from pure graph theory. We will not present the rigorous proof due to Grimmett \autocite*[14--15]{grimmett_1999} here, but the reader should be able to convince him/herself that this proposition is very believable simply by drawing some pictures. Indeed, a cycle of open edges in $(\Z^2)^*$ blocks all open edges of $\Z^2$ connecting the interior and the exterior of the cycle. The cluster $C$ is then confined inside the cycle, and therefore can only contain finitely many vertices. In addition, for the cycle to surround the origin, it must intersect the line $y = \frac{1}{2}$ (which lies right above the origin) on the right, i.e., at a nonnegative $x$.
 
 \begin{prop}\label{prop:cylce_implies_path}
 Let $n$ be a nonnegative integer. If there exists a cycle in $(\Z^2)^*$ surrounding $O$ and passing by $(n + \frac{1}{2}, \frac{1}{2})$, then there exists a self-avoiding path in $(\Z^2)^*$ starting from $(n + \frac{1}{2}, \frac{1}{2})$ of length $2n + 3$.
@@ -273,7 +273,7 @@ As with $\Z^2$, our interest lies in computing the value of the critical probabi
 For Bernoulli bond percolation on $\Z^3$, we have $\dfrac{1}{5} \leq p_c \leq \dfrac{1}{2}$.
 \end{thm}
 \begin{proof}
-Firstly, we use the reasoning from \cref{subsec:no_inf_cluster} to prove that $p_c > \frac{1}{5}$. For a positive integer $n$, let $\Omega_n$ denote the set of self-avoiding paths of length $n$ starting from the origin.
+Firstly, we use the reasoning from \cref{subsec:no_inf_cluster} to prove that $p_c > \frac{1}{5}$. For nonnegative integer $n$, let $\Omega_n$ denote the set of self-avoiding paths of length $n$ starting from the origin.
 
 \input{figures/z3_paths.tex}
 
@@ -305,15 +305,15 @@ It has been numerically determined that $p_c \simeq 0.24881182$ for percolation 
 \section{Conclusion}
 In this investigation, we have studied the critical probability for percolation on $\Z^2$ and $\Z^3$.
 
-One possible way to further the investigation is to consider the values of $p_c$ on other kinds of graphs. These include trees of a fixed number of branches and triangular lattices. The former is linked to genealogical trees, and it has been mathematically shown that the probability of extinction of family names is $93\%$ \autocite[]{gennes_2000} for instance. In addition, for large values of $d$, the lattice $\Z^d$ often behaves in a similar manner to trees concerning infinite clusters \autocite[]{gennes_2000}. Studies of the latter has taken this idea of similarity between different graphs even further to suggest that some properties of percolation are conserved under certain transformations; Smirnov's proof of Cardy's formula \autocite*[1]{smirnov_2001} has sparked a recent interest in this area. At the same time, many questions and a few answers have been conceived in considering more complex systems of percolation, such as directed edges.
+One possible way to further the investigation is to consider the values of $p_c$ on other kinds of graphs. These include trees of a fixed number of branches and triangular lattices. The former is linked to genealogical trees, and it has been mathematically shown that the probability of extinction of family names is $93\%$ \autocite[]{gennes_2000} for instance. In addition, for large values of $d$, the lattice $\Z^d$ often behaves in a similar manner to trees concerning infinite clusters \autocite[]{gennes_2000}. Studies of the latter have taken this idea of similarity between different graphs even further to suggest that some properties of percolation are conserved under certain transformations; Smirnov's proof of Cardy's formula \autocite*[1]{smirnov_2001} has sparked a recent interest in this area. At the same time, many questions and a few answers have been conceived in considering more complex systems of percolation, such as directed edges.
 
-Another direction to pursue is a closer study of how the percolation model behaves. At the same time as the notion of the critical probability allows us to understand the macroscopic behaviour concerning the existence of infinite clusters, more questions arise: when $p > p_c$, is the infinite cluster unique? (\textit{Spoiler alert:}it almost surely is.) When $p = p_c$, does an infinite cluster exist? Kesten \autocite*[42]{kesten_1980} has shown that for bond percolation on $\Z^2$, it is true that $\theta(p) = 0$. It remains an open question whether such is the case for lattices in higher dimensions, as when $p$ approaches $p_c$, the percolation system becomes fractal.
+Another direction to pursue is a closer study of how the percolation model behaves. While the notion of the critical probability allows us to understand the macroscopic behaviour concerning the existence of infinite clusters, more questions arise: when $p > p_c$, is the infinite cluster unique? (\textit{Spoiler alert:} it almost surely is.) When $p = p_c$, does an infinite cluster exist? Kesten \autocite*[42]{kesten_1980} has shown that for bond percolation on $\Z^2$, it is true that $\theta(p) = 0$. It remains an open question whether such is the case for lattices in higher dimensions, as when $p$ approaches $p_c$, the percolation system becomes fractal.
 
-At last, we shall return to the mathematical model itself, whose intricacy is concealed behind its simplistic formulation. Moreover, it is often difficult, if not impossible, to turn our intuition into logic. These ideas are perhaps best summed up in Kesten's words:
+At last, we shall return to the mathematical model itself, whose intricacy is concealed behind its simplistic formulation. Moreover, from the proofs, we saw that it is often difficult to turn our intuition into logic. These ideas are perhaps best summed up in Kesten's words:
 
-\begin{quotation}
+\begin{displayquote}
 ``Quite apart from the fact that percolation theory had its origin in an honest applied problem, it is a source of fascinating problems of the best kind a mathematician can wish for: problems which are easy to state with a minimum of preparation, but whose solutions are (apparently) difficult and require new methods.''
-\end{quotation}
+\end{displayquote}
 
 \printbibliography
 
