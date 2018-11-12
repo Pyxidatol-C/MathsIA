@@ -8,8 +8,6 @@
 \usepackage[labelfont=bf]{caption}
 \usepackage[style=mla,backend=biber]{biblatex}
 
-% Remove () from theorem name
-\patchcmd{\thmhead}{(#3)}{#3}{}{}
 
 \addbibresource{mysources.bib}
 
@@ -258,6 +256,8 @@ Moreover, in \cref{subsec:no_inf_cluster,,subsec:inf_cluster}, we have shown tha
 
 Clearly, the value of $p_c$ is not trivial --- our efforts were not in vain. That said, we are still left with an interval of values for $p_c$, and one endpoint is even numerically approximated. Dispirited and depressed, the reader makes a random guess before throwing in the towel: $p_c = \frac{1}{2}$ ... Bingo!
 
+% Remove () from theorem name
+\patchcmd{\thmhead}{(#3)}{#3}{}{}
 \begin{thm}[{\autocite[42]{kesten_1980}}]\label{thm:pc_eq_one_half_kesten}
 For Bernoulli bond percolation on $\Z^2$, the value of $p_c$ is  $\dfrac{1}{2}$.
 \end{thm}
