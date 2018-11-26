@@ -6,19 +6,17 @@
 \usepackage{etoolbox}
 \usepackage[british]{babel}
 \usepackage[labelfont=bf]{caption}
-\usepackage[style=mla,backend=biber]{biblatex}
+\usepackage[style=mla-new,backend=biber]{biblatex}
 
 
 \addbibresource{mysources.bib}
 
-% 3006 words
 \title{
 \textbf{Mathematics Internal Assessment}\\
 \bigskip
-Critical Probability for Percolation on $\Z^2$ and $\Z^3$
-% Is this an EE?
+Planar percolation: a seemingly simple model
 }
-\author{Jingjie YANG}
+\author{}
 \date{}
 
 \begin{document}
@@ -35,11 +33,10 @@ The edges represent the inner passageways of the stone, where open edges let wat
 Apart from $p = 0$ where the stone is entirely impermeable, and $p = 1$ where water flows surely past the origin, to have an idea of how the model behaves at other nontrivial values of $p$, we can contemplate computer simulations of a finite section of the square lattice:
 
 \input{figures/percolations_gallery.tex}
-\break
 
 Readers with good eyesight may bother to check that for $p = 0.6$, there is a path of open edges (in red) connecting the left and right sides, whereas such is not the case for $p = 0.2$ and $p = 0.3$ where the connected components are isolated. Is there a value of the parameter $p$ at which infinite clusters emerge? Can we compute this critical value of $p$? Is the critical value different for the cubic lattice $\Z^3$? 
 
-What is described above forms the basis of percolation theory. It may appear to be an exotic topic of probability; however, since its birth in 1957 due to Broadbent and Hammersley \autocite*[693]{broadbent_hammersley_1957}, the field has attracted pure mathematicians and scientists from myriad domains. Despite its simplicity, the percolation model accounts for the behaviour of many natural systems --- ranging from the flow of fluids through a disordered porous medium and conductivity of materials to the spread of forest fires and epidemics \autocite[60]{gennes_2000}. Nevertheless, the first major mathematical result was not announced until only some twenty years later: in 1980, Kesten \autocite*[41]{kesten_1980} completed Harris's 1960 work \autocite*[13]{harris_1960} to ascertain the value of the critical probability on the square lattice. Nowadays, percolation theory is a growing field that interconnects maths, physics, and computer science. Very delighted to discover the connections between my favourite disciplines, I did extensive research on this topic.
+What is described above forms the basis of percolation theory. It may appear to be an exotic topic of probability; however, since its birth in 1957 due to Broadbent and Hammersley \autocite*[693]{broadbent_hammersley_1957}, the problem has attracted pure mathematicians and scientists from myriad domains. Despite its simplicity, the percolation model accounts for the behaviour of many natural systems --- ranging from the flow of fluids through a disordered porous medium to the spread of forest fires and epidemics \autocite[60]{gennes_2000}. Nevertheless, the first major mathematical result was not announced until only some twenty years later: in 1980, Kesten \autocite*[41]{kesten_1980} completed Harris's 1960 work \autocite*[13]{harris_1960} to ascertain the value of the critical probability on the square lattice. Nowadays, percolation theory is a growing field that interconnects maths, physics, and computer science. Very delighted to discover the links between my favourite disciplines, I did extensive research on this topic.
 
 To answer the questions raised above about the existence of the critical probability on the square and cubic lattices, we will firstly acquaint ourselves with a few notions in probability in order to initiate a rigorous discussion of the subject.
 
@@ -61,70 +58,70 @@ where $\abs{C}$ denotes the size of the cluster $C$.
 \input{figures/cluster_self_avoiding_path.tex}
 \end{ex}
 
-Note that we use $\P(A)$ instead of the habitual $P(A)$ to denote the probability of an event $A$ occurring, because it depends on the value of the parameter $p$. Nonetheless, the probabilities of any two events $A$ and $B$ satisfy the following as usual:
+Note that we use $\Pp(A)$ instead of the habitual $P(A)$ to denote the probability of an event $A$ occurring, because it depends on the value of the parameter $p$. Nonetheless, the probabilities of any two events $A$ and $B$ satisfy the following as usual:
 \begin{itemize}
-    \item $0 \leq \P(A) \leq 1$ --- in particular, $\P(\varnothing) = 0$;
-    \item $\P(A \cup B) = \P(A) + \P(B) - \P(A \cap B)$;
-    \item $A$ is the \textit{complement} of $B$ if and only if $\P(A) = 1 - \P(B)$;
-    \item $A$ and $B$ are \textit{independent} if and only if $\P(A \cap B) = \P(A) \P(B)$.
+    \item $0 \leq \Pp(A) \leq 1$ --- in particular, $\Pp(\varnothing) = 0$;
+    \item $\Pp(A \cup B) = \Pp(A) + \Pp(B) - \Pp(A \cap B)$;
+    \item $A$ is the \textit{complement} of $B$ if and only if $\Pp(A) = 1 - \Pp(B)$;
+    \item $A$ and $B$ are \textit{independent} if and only if $\Pp(A \cap B) = \Pp(A) \Pp(B)$.
 \end{itemize}
 
 \begin{lem}[Monotonicity]\label{lem:event_subseteq}
-If the occurrence of event $A$ implies the occurrence of event $B$, then $$\P(A) \leq \P(B).$$
+If the occurrence of event $A$ implies the occurrence of event $B$, then $$\Pp(A) \leq \Pp(B).$$
 \end{lem}
 \begin{proof}
 By \cref{defn:outcome_and_event}, we see that $A$ and $B$ are two sets of outcomes where, for all $\omega \in A$, we also have $\omega \in B$. Hence $A \subseteq B$, and 
 \begin{align*}
-    \P(B) 
-    &= \P(A \cup (B \setminus A))\\
-    &= \P(A) + \P(B \setminus A) - \P(A \cap (B \setminus A))\\
-    &\geq \P(A)
+    \Pp(B) 
+    &= \Pp(A \cup (B \setminus A))\\
+    &= \Pp(A) + \Pp(B \setminus A) - \Pp(A \cap (B \setminus A))\\
+    &\geq \Pp(A)
 \end{align*}
-since $A \cap (B \setminus A) = \varnothing$ and $\P(B \setminus A) \geq 0$.
+since $A \cap (B \setminus A) = \varnothing$ and $\Pp(B \setminus A) \geq 0$.
 \end{proof}
 
 \begin{cor}\label{cor:inf_cluster}
-Using the definition from \cref{ex:cluster_of_size_n}, for integers $m$ and $n$, if $n > m \geq 0$, we have $\{\abs{C} \geq n\} \subseteq \{\abs{C} \geq m\}$ and hence $\P(\abs{C} \geq n) \leq \P(\abs{C} \geq m)$. We then define
+Using the definition from \cref{ex:cluster_of_size_n}, for integers $m$ and $n$, if $n > m \geq 0$, we have $\{\abs{C} \geq n\} \subseteq \{\abs{C} \geq m\}$ and hence $\Pp(\abs{C} \geq n) \leq \Pp(\abs{C} \geq m)$. We then define
 \[
-\P(\abs{C} = \infty) 
-= \lim_{n \to \infty} \P(\text{there is a self-avoiding path of open edges of length } n \text{ from } O).
+\Pp(\abs{C} = \infty) 
+= \lim_{n \to \infty} \Pp(\text{there is a self-avoiding path of open edges of length } n \text{ from } O).
 \]
 \end{cor}
-We also use $\theta(p)$ to refer to the probability that there is an infinite cluster at the origin as a function of $p$.
+We also use $\theta(p)$ to refer to $\Pp(\abs{C} = \infty)$, the probability that there is an infinite cluster at the origin, as a function of $p$.
 
 \section{Percolation on the Square Lattice}\label{sec:Z2}
 \subsection{No Infinite Clusters}\label{subsec:no_inf_cluster}
 To start with, we want to know for which values of $p$ (apart from $p = 0$, more specifically) there is no infinite cluster on the square lattice, i.e., $\theta(p) = 0$.
 
 Let $n$ be a nonnegative integer, and let $\Omega_n$ be the set of all self-avoiding paths of length $n$ starting from the origin. \Cref{cor:inf_cluster} tells us that
-\[\theta(p) = \lim_{n \to \infty} \P(\bigcup_{\gamma \in \Omega_n} \text{all edges of the path } \gamma \text{ are open}).\]
+\[\theta(p) = \lim_{n \to \infty} \Pp(\bigcup_{\gamma \in \Omega_n} \text{all edges of the path } \gamma \text{ are open}).\]
 We can then find an upper bound on $\theta(p)$ with the help of the following lemma.
 
 \begin{lem}[Boole's inequality]\label{lem:union_bound}
-$\P(A_1 \cup A_2 \cup \cdots \cup A_n) \leq \P(A_1) + \P(A_2) + \cdots + \P(A_n)$
+$\Pp(A_1 \cup A_2 \cup \cdots \cup A_n) \leq \Pp(A_1) + \Pp(A_2) + \cdots + \Pp(A_n)$
 \end{lem}
 \begin{proof}[Proof]
-We proceed by induction on $n$. Let $\mathcal{P}(n): \P(\bigcup_{i = 1}^n A_i) \leq \sum_{i = 1}^n \P(A_i)$ for  $n \in \N$.
+We proceed by induction on $n$. Let $\mathcal{P}(n): \Pp(\bigcup_{i = 1}^n A_i) \leq \sum_{i = 1}^n \Pp(A_i)$ for  $n \in \N$.
 \begin{description}
-\item \textit{Base case.} We have $\P(A_1) \leq \P(A_1)$, and hence $\mathcal{P}(1)$ is true.
+\item \textit{Base case.} We have $\Pp(A_1) \leq \Pp(A_1)$, and hence $\mathcal{P}(1)$ is true.
 \item \textit{Inductive step.} Assume that $\mathcal{P}(k)$ is true for a certain $k \in \N$; show that $\mathcal{P}(k + 1)$ is true.
 We use the associative property of the union operation:
 \begin{align*}
-    \P(\bigcup_{i = 1}^{k + 1} A_i) 
-    &= \P(\bigcup_{i = 1}^{k} A_i \cup A_{k + 1})\\
-    &= \P(\bigcup_{i = 1}^{k} A_i) + \P(A_{k + 1}) - \P(\bigcup_{i = 1}^{k} A_i \cap A_{k + 1})\\
-    &\leq \sum_{i = 1}^k \P(A_i) + \P(A_{k + 1}) - \P(\bigcup_{i = 1}^{k} A_i \cap A_{k + 1})\\
+    \Pp(\bigcup_{i = 1}^{k + 1} A_i) 
+    &= \Pp(\bigcup_{i = 1}^{k} A_i \cup A_{k + 1})\\
+    &= \Pp(\bigcup_{i = 1}^{k} A_i) + \Pp(A_{k + 1}) - \Pp(\bigcup_{i = 1}^{k} A_i \cap A_{k + 1})\\
+    &\leq \sum_{i = 1}^k \Pp(A_i) + \Pp(A_{k + 1}) - \Pp(\bigcup_{i = 1}^{k} A_i \cap A_{k + 1})\\
 \end{align*}
-Since $\P(\bigcup_{i = 1}^{k} A_i \cap A_{k + 1}) \geq 0$, we can conclude that $\P(\bigcup_{i = 1}^{k + 1} A_i) \leq \sum_{i = 1}^{k + 1} \P(A_i)$.
+Since $\Pp(\bigcup_{i = 1}^{k} A_i \cap A_{k + 1}) \geq 0$, we can conclude that $\Pp(\bigcup_{i = 1}^{k + 1} A_i) \leq \sum_{i = 1}^{k + 1} \Pp(A_i)$.
 \end{description}
 By the principle of mathematical induction, $\mathcal{P}(n)$ is true for any $n \in \N$.
 \end{proof}
 
 It follows that
-\[\theta(p) \leq \lim_{n \to \infty} \sum_{\gamma \in \Omega_n} \P(\text{all edges of the path } \gamma \text{ are open}).\]
+\[\theta(p) \leq \lim_{n \to \infty} \sum_{\gamma \in \Omega_n} \Pp(\text{all edges of the path } \gamma \text{ are open}).\]
 
 \begin{prop}\label{prop:p_path_all_open}
-$\P(\text{all edges of } \gamma \text{ are open}) = p^n$ for all path $\gamma \in \Omega_n$.
+$\Pp(\text{all edges of } \gamma \text{ are open}) = p^n$ for all path $\gamma \in \Omega_n$.
 \end{prop}
 \begin{proof}
 By the definition of the set $\Omega_n$, the self-avoiding path $\gamma$ contains $n$ distinct edges. Furthermore, each edge $e$ in $\gamma$ is defined to independently be open with probability $p$. Thus, the probability that all edges of the given path is open is $\prod_{e \in \gamma} p = p^n$.
@@ -171,7 +168,7 @@ Given a planar graph $G$, we define its \textit{dual graph} $G^*$ in such a way 
 Consider $\left(\Z^2\right)^*$, the dual graph of the square lattice $\Z^2$ and its edges.
 \input{figures/square_lattice_dual.tex}
 
-We observe that the graph $\Z^2$ is \textit{self-dual}: by a vector transformation of $(\frac{1}{2}, \frac{1}{2})$, each vertex (resp.\ edge) of $\Z^2$ uniquely correspond to a vertex (resp.\ edge) in $(\Z^2)^*$. Moreover, concerning percolation, we declare each edge $e^*$ of $(\Z^2)^*$ to be open (resp.\ closed) if the edge $e$ of $\Z^2$ that $e^*$ crosses is closed (resp.\ open). In other words, the event that $e^*$ is open is the complement of the event that $e$ is open. Since $e$ is open with probability $p$, the probability of $e^*$ being open is $1 - p$. As such, we consider percolation is realised in $(\Z^2)^*$ with parameter $1 - p$.
+We observe that the graph $\Z^2$ is \textit{self-dual}: by a vector transformation of $(\frac{1}{2}, \frac{1}{2})$, each vertex (resp.\ edge) of $\Z^2$ uniquely corresponds to a vertex (resp.\ edge) in $(\Z^2)^*$. Moreover, concerning percolation, we declare each edge $e^*$ of $(\Z^2)^*$ to be open (resp.\ closed) if the edge $e$ of $\Z^2$ that $e^*$ crosses is closed (resp.\ open). In other words, the event that $e^*$ is open is the complement of the event that $e$ is open. Since $e$ is open with probability $p$, the probability of $e^*$ being open is $1 - p$. As such, we consider percolation is realised in $(\Z^2)^*$ with parameter $1 - p$.
 
 \Cref{fig:square_lattice_dual} above shows an example of how from the open edges (red) in $\Z^2$ (grey grid) we can create the dual open edges (blue) in $(\Z^2)^*$ (orange dots). Notice that, in the top-left corner, the cluster of 2 vertices in $\Z^2$ is surrounded by a cycle of open edges in $(\Z^2)^*$. We can then formulate a condition for the cluster at the origin to be finite in a similar fashion.
 \end{ex}
@@ -200,11 +197,11 @@ If $p > 0.762$, then $\theta(p) > 0$.
 \begin{proof}
 We begin by finding an upper bound on the probability that $\abs{C}$ is finite.
 \begin{align}
-    \P(\abs{C} < \infty)
-    &= \lim_{N \to \infty} \P\left(\bigcup_{n = 0}^N \exists\,\text{cycle surrounding the origin passing by } (n + \frac{1}{2}, \frac{1}{2})\right)\label{eq:union_exists_cycle}\\
-    &\leq \lim_{N \to \infty} \sum_{n = 0}^N \P\left(\exists\,\text{cycle surrounding the origin passing by } (n + \frac{1}{2}, \frac{1}{2})\right)\label{eq:sum_exists_cycle}\\
-    &\leq \lim_{N \to \infty} \sum_{n = 0}^N \P(\bigcup_{\gamma \in \Omega_{2n + 3}} \text{all edges of the path } \gamma \text{ are open})\label{eq:sum_union_exists_path}\\
-    &\leq \lim_{N \to \infty} \sum_{n = 0}^N \sum_{\gamma \in \Omega_{2n + 3}} \P(\text{all edges of the path } \gamma \text{ are open})\label{eq:sum_sum_path_open}\\
+    \Pp(\abs{C} < \infty)
+    &= \lim_{N \to \infty} \Pp\left(\bigcup_{n = 0}^N \exists\,\text{cycle surrounding the origin passing by } (n + \frac{1}{2}, \frac{1}{2})\right)\label{eq:union_exists_cycle}\\
+    &\leq \lim_{N \to \infty} \sum_{n = 0}^N \Pp\left(\exists\,\text{cycle surrounding the origin passing by } (n + \frac{1}{2}, \frac{1}{2})\right)\label{eq:sum_exists_cycle}\\
+    &\leq \lim_{N \to \infty} \sum_{n = 0}^N \Pp(\bigcup_{\gamma \in \Omega_{2n + 3}} \text{all edges of the path } \gamma \text{ are open})\label{eq:sum_union_exists_path}\\
+    &\leq \lim_{N \to \infty} \sum_{n = 0}^N \sum_{\gamma \in \Omega_{2n + 3}} \Pp(\text{all edges of the path } \gamma \text{ are open})\label{eq:sum_sum_path_open}\\
     &\leq \lim_{N \to \infty} \sum_{n = 0}^N (4 \cdot 3^{2n + 2}) (1 - p)^{2n + 3}\label{eq:sum_path_open}
 \end{align}
 We start by using the equivalence between the event $\{\abs{C} < \infty\}$ and the existence of a cycle in $(\Z^2)^*$ around the origin stated in \cref{prop:c_finite_iff_cycle} to establish \cref{eq:union_exists_cycle}. Next, \cref{lem:union_bound} allows us to express the probability of a union of events as the sum of the probabilities of the events in \cref{eq:sum_exists_cycle}. Before passing to \cref{eq:sum_union_exists_path}, we need to make several observations. Firstly, we can apply \cref{lem:event_subseteq}, which allows the probability of an event to be bounded from above by the probability of another event that it implies, to find an upper bound on the probability of such cycles existing using the probability of that self-avoiding paths of a certain length exist by \cref{prop:cylce_implies_path}. In addition, the number of such paths does not depend on the starting vertex, whether it is the origin or an arbitrary $(n + \frac{1}{2}, \frac{1}{2})$; we can thus use the set $\Omega_{2n + 3}$ from \cref{subsec:no_inf_cluster}. Now, the reader should be familiar with the remaining steps, since we almost replicated them from the proof of \cref{thm:pc_lower_bound}. To derive \cref{eq:sum_sum_path_open}, we again leverage \cref{lem:union_bound} to rid of the union. Finally, in \cref{eq:sum_path_open}, we expand the sum with the upper bound on $\abs{\Omega_{2n + 3}}$ that we established in \cref{prop:nb_paths_len_n}. The only difference is that in $(\Z^2)^*$, each edge is open with probability $1 - p$ as defined in \cref{ex:dual_lattice}; we simply need to adapt \cref{prop:p_path_all_open} so that $1 - p$ is considered as the parameter instead.
@@ -222,11 +219,11 @@ The geometric series only converges when $\abs{9 (1 - p)^2} < 1$, i.e., when $-\
 
 \input{figures/pc_upper_bound_plot.tex}
 
-As shown in \cref{fig:pc_upper_bound_plot} above, graphically we can determine that for $p > 0.762$, \[\P(\abs{C} < \infty) \leq \frac{36(1 - p)^3}{1 - 9(1 - p)^2} < 1.\]
+As shown in \cref{fig:pc_upper_bound_plot} above, graphically we can determine that for $p > 0.762$, \[\Pp(\abs{C} < \infty) \leq \frac{36(1 - p)^3}{1 - 9(1 - p)^2} < 1.\]
 
 Note that the event $\{\abs{C} < \infty\}$ is the complement of the event $\{\abs{C} = \infty\}$, and hence
 \[
-    \P(\abs{C} < \infty) = 1 - \P(\abs{C} = \infty) = 1 - \theta(p).
+    \Pp(\abs{C} < \infty) = 1 - \Pp(\abs{C} = \infty) = 1 - \theta(p).
 \]
 
 We can now conclude that
@@ -259,7 +256,7 @@ Clearly, the value of $p_c$ is not trivial --- our efforts were not in vain. Tha
 % Remove () from theorem name
 \patchcmd{\thmhead}{(#3)}{#3}{}{}
 \begin{thm}[{\autocite[42]{kesten_1980}}]\label{thm:pc_eq_one_half_kesten}
-For Bernoulli bond percolation on $\Z^2$, the value of $p_c$ is  $\dfrac{1}{2}$.
+For Bernoulli bond percolation on $\Z^2$, the value of $p_c$ is $\dfrac{1}{2}$.
 \end{thm}
 
 It is worth mentioning that the actual proof for the above theorem is far beyond the scope of this investigation. Instead, we will present a simple heuristic argument here.
@@ -268,54 +265,54 @@ It is worth mentioning that the actual proof for the above theorem is far beyond
 It makes intuitive sense that as $p$ varies, the macroscopic behaviour of the percolation model should only change once. This observation implies that $p_c$ is necessarily equal to $1 - p_c$. Otherwise, an infinite cluster will appear in $\Z^2$ at $p = p_c$, and an infinite cluster will disappear in $(\Z^2)^*$ at $p = 1 - p_c$. Furthermore, if we assume that $p_c < \frac{1}{2}$, for any $p \in\,]p_c, 1 - p_c[$, there is an infinite cluster both on $\Z^2$ and on $(\Z^2)^*$. This contradicts our intuition that the coexistence of an infinite cluster on the square lattice and on its dual is impossible. A similar contradiction arises if we assume that $p_c > \frac{1}{2}$. Thus, $p_c = \frac{1}{2}$.
 \end{hproof}
 
-\section{Percolation on the Cubic Lattice}
-\subsection{The Cubic Lattice}
-We can define the \textit{(simple) cubic lattice} $\Z^3$ in a similar fashion to the square lattice $\Z^2$: all the points that have integer coordinates $(x, y, z)$ constitute the set of vertices, and all the edges that connect two neighbouring points $A$ and $B$ on the cubic lattice, i.e., $\abs{A_x - B_x} + \abs{A_y - B_y} + \abs{A_z - B_z} = 1$, compose the set of edges. We use the same definition of the event $\{\abs{C} = \infty\}$ in terms of the existence of an arbitrarily long self-avoiding path.
-
-As with $\Z^2$, our interest lies in computing the value of the critical probability $p_c$ for $\Z^3$. We shall see how our work on the square lattice case will help us with proving a similar result on the cubic lattice, which in addition is closer to reality for modelling purposes.
-
-\subsection{The Critical Value}
-\begin{thm}\label{thm:pc_on_Z3}
-For Bernoulli bond percolation on $\Z^3$, we have $\dfrac{1}{5} \leq p_c \leq \dfrac{1}{2}$.
-\end{thm}
-\begin{proof}
-Firstly, we use the reasoning from \cref{subsec:no_inf_cluster} to prove that $p_c > \frac{1}{5}$. For nonnegative integer $n$, let $\Omega_n$ denote the set of self-avoiding paths of length $n$ starting from the origin.
-
-\input{figures/z3_paths.tex}
-
-As shown in \cref{fig:z3_paths} above, there are at most $6 \cdot 5^{n - 1}$ paths in $\Omega_n$. Furthermore, for any path in $\Omega_n$, the probability that all its $n$ edges are open equals $p^n$.
-
-\begin{align*}
-    \theta(p) 
-    &= \lim_{n \to \infty} \P(\bigcup_{\gamma \in \Omega_n} \text{all the } n \text{ edges of } \gamma \text{ are open})\\
-    &\leq \lim_{n \to \infty} \sum_{\gamma \in \Omega_n} p^n\\
-    &\leq \lim_{n \to \infty} \left(6 \cdot 5^{n - 1}\right) p^n\\
-    &= \lim_{n \to \infty} \frac{6}{5} (5 p)^{n}
-\end{align*}
-
-The limit tends to 0 if $\abs{5p} < 1$. As such, if $p < \frac{1}{5}$, then $\theta(p) = 0$. Then, by the definition of $p_c$, we can deduce that $p_c \geq \frac{1}{5}$.
-
-Next, to show that $p_c \leq \frac{1}{2}$, one might be attempted to invoke the dual graph argument from \cref{subsec:inf_cluster}. Let us take a moment to consider what the dual graph of the cubic lattice would look like. Call to mind that we place a vertex for each face of $\Z^3$, and an edge for each edge of $\Z^3$ separating two faces.
-
-\input{figures/z3_dual.tex}
-
-We can see from \cref{fig:z3_dual} above that the dual of a cube is a regular octahedron. Moreover, consider the top vertex of the octahedron. It corresponds to the top face of the cube, whose $4$ edges each separate it from $3$ other faces. As a result, the top vertex in the dual graph is connected to $12$ other vertices, while in $\Z^3$ each vertex is connected to only $6$ neighbours. Clearly, the cubic lattice is not isomorphic to its dual. As a direct consequence, we cannot identify a one-to-one correspondence between the edges of $\Z^3$ and of $(\Z^3)^*$ to imitate how we exploited the properties of $(\Z^2)^*$ to find an upper bound on $p_c$. In fact, the self-duality of the square lattice is a very peculiar characteristic for graphs that already hints at how $p_c$ is exactly $\frac{1}{2}$ on $\Z^2$.
-
-Nevertheless, it is enough to make the simple remark that any percolation on $\Z^3$ contains a copy of percolation on $\Z^2$, since each ``layer'' of the cubic lattice is a copy of the square lattice. Consequently, when $p > \frac{1}{2}$ --- the critical probability on $\Z^2$ as stated in \cref{thm:pc_eq_one_half_kesten}, there exists an infinite cluster on $\Z^2$  and therefore also on $\Z^3$. We conclude that $p_c \leq \frac{1}{2}$ on the cubic lattice.
-\end{proof}
-
-\begin{rem*}
-It has been numerically determined that $p_c \simeq 0.24881182$ for percolation on $\Z^3$ \autocite[7]{zhou_2014}. This value is consistent with what we have established in \cref{thm:pc_on_Z3}.
-\end{rem*}
+%\section{Percolation on the Cubic Lattice}
+%\subsection{The Cubic Lattice}
+%We can define the \textit{(simple) cubic lattice} $\Z^3$ in a similar fashion to the square lattice $\Z^2$: all the points that have integer coordinates $(x, y, z)$ constitute the set of vertices, and all the edges that connect two neighbouring points $A$ and $B$ on the cubic lattice, i.e., $\abs{A_x - B_x} + \abs{A_y - B_y} + \abs{A_z - B_z} = 1$, compose the set of edges. We use the same definition of the event $\{\abs{C} = \infty\}$ in terms of the existence of an arbitrarily long self-avoiding path.
+%
+%As with $\Z^2$, our interest lies in computing the value of the critical probability $p_c$ for $\Z^3$. We shall see how our work on the square lattice case will help us with proving a similar result on the cubic lattice, which in addition is closer to reality for modelling purposes.
+%
+%\subsection{The Critical Value}
+%\begin{thm}\label{thm:pc_on_Z3}
+%For Bernoulli bond percolation on $\Z^3$, we have $\dfrac{1}{5} \leq p_c \leq \dfrac{1}{2}$.
+%\end{thm}
+%\begin{proof}
+%Firstly, we use the reasoning from \cref{subsec:no_inf_cluster} to prove that $p_c > \frac{1}{5}$. For nonnegative integer $n$, let $\Omega_n$ denote the set of self-avoiding paths of length $n$ starting from the origin.
+%
+%\input{figures/z3_paths.tex}
+%
+%As shown in \cref{fig:z3_paths} above, there are at most $6 \cdot 5^{n - 1}$ paths in $\Omega_n$. Furthermore, for any path in $\Omega_n$, the probability that all its $n$ edges are open equals $p^n$.
+%
+%\begin{align*}
+%    \theta(p) 
+%    &= \lim_{n \to \infty} \Pp(\bigcup_{\gamma \in \Omega_n} \text{all the } n \text{ edges of } \gamma \text{ are open})\\
+%    &\leq \lim_{n \to \infty} \sum_{\gamma \in \Omega_n} p^n\\
+%    &\leq \lim_{n \to \infty} \left(6 \cdot 5^{n - 1}\right) p^n\\
+%    &= \lim_{n \to \infty} \frac{6}{5} (5 p)^{n}
+%\end{align*}
+%
+%The limit tends to 0 if $\abs{5p} < 1$. As such, if $p < \frac{1}{5}$, then $\theta(p) = 0$. Then, by the definition of $p_c$, we can deduce that $p_c \geq \frac{1}{5}$.
+%
+%Next, to show that $p_c \leq \frac{1}{2}$, one might be attempted to invoke the dual graph argument from \cref{subsec:inf_cluster}. Let us take a moment to consider what the dual graph of the cubic lattice would look like. Call to mind that we place a vertex for each face of $\Z^3$, and an edge for each edge of $\Z^3$ separating two faces.
+%
+%\input{figures/z3_dual.tex}
+%
+%We can see from \cref{fig:z3_dual} above that the dual of a cube is a regular octahedron. Moreover, consider the top vertex of the octahedron. It corresponds to the top face of the cube, whose $4$ edges each separate it from $3$ other faces. As a result, the top vertex in the dual graph is connected to $12$ other vertices, while in $\Z^3$ each vertex is connected to only $6$ neighbours. Clearly, the cubic lattice is not isomorphic to its dual. As a direct consequence, we cannot identify a one-to-one correspondence between the edges of $\Z^3$ and of $(\Z^3)^*$ to imitate how we exploited the properties of $(\Z^2)^*$ to find an upper bound on $p_c$. In fact, the self-duality of the square lattice is a very peculiar characteristic for graphs that already hints at how $p_c$ is exactly $\frac{1}{2}$ on $\Z^2$.
+%
+%Nevertheless, it is enough to make the trifling remark that any percolation on $\Z^3$ contains a copy of percolation on $\Z^2$, since each ``layer'' of the cubic lattice is a copy of the square lattice. Consequently, when $p > \frac{1}{2}$ --- the critical probability on $\Z^2$ as stated in \cref{thm:pc_eq_one_half_kesten}, there exists an infinite cluster on $\Z^2$  and therefore also on $\Z^3$. We conclude that $p_c \leq \frac{1}{2}$ on the cubic lattice.
+%\end{proof}
+%
+%\begin{rem*}
+%It has been numerically determined that $p_c \simeq 0.24881182$ for percolation on $\Z^3$ \autocite[7]{zhou_2014}. This value is consistent with what we have established in \cref{thm:pc_on_Z3}.
+%\end{rem*}
 
 \section{Conclusion}
-In this investigation, we have studied the critical probability for percolation on $\Z^2$ and $\Z^3$.
+In this investigation, we have studied the critical probability for percolation on $\Z^2$.
 
-One possible way to further the investigation is to consider the values of $p_c$ on other kinds of graphs. These include trees of a fixed number of branches and triangular lattices. The former is linked to genealogical trees, and it has been mathematically shown that the probability of extinction of family names is $93\%$ \autocite[]{gennes_2000} for instance. In addition, for large values of $d$, the lattice $\Z^d$ often behaves in a similar manner to trees concerning infinite clusters \autocite[]{gennes_2000}. Studies of the latter have taken this idea of similarity between different graphs even further to suggest that some properties of percolation are conserved under certain transformations; Smirnov's proof of Cardy's formula \autocite*[1]{smirnov_2001} has sparked a recent interest in this area. At the same time, many questions and a few answers have been conceived in considering more complex systems of percolation, such as directed edges.
+One possible way to further the investigation is to consider the values of $p_c$ on other kinds of graphs. It is natural to consider $\Z^3$ as a more accurate physical model. The critical probability can be bounded from below using the same method from \cref{subsec:no_inf_cluster}, and from above with the trifling observation that a copy of $\Z^2$ is embedded in $\Z^3$ --- the exact details are left as an exercise to the reader. Also of interest are trees of a fixed number of branches and triangular lattices. The former is linked to genealogical trees, and it has been mathematically shown that the probability of extinction of family names after infinitely many generations is $92\%$ \autocite[]{gennes_2000} for instance. In addition, for large values of $d$, the lattice $\Z^d$ often behaves in a similar manner to trees concerning infinite clusters \autocite[]{gennes_2000}. Studies of the latter have taken this idea of similarity between different graphs even further to suggest that some properties of percolation are conserved under certain transformations; Smirnov's proof of Cardy's formula \autocite*[1]{smirnov_2001} has sparked a recent interest in this area. At the same time, many questions and a few answers have been conceived in considering more complex systems of percolation, such as directed edges on finite graphs.
 
-Another direction to pursue is a closer study of how the percolation model behaves. While the notion of the critical probability allows us to understand the macroscopic behaviour concerning the existence of infinite clusters, more questions arise: when $p > p_c$, is the infinite cluster unique? (\textit{Spoiler alert:} it almost surely is.) When $p = p_c$, does an infinite cluster exist? Kesten \autocite*[42]{kesten_1980} has shown that for bond percolation on $\Z^2$, it is true that $\theta(p) = 0$. It remains an open question whether such is the case for lattices in higher dimensions, as when $p$ approaches $p_c$, the percolation system becomes fractal.
+Another direction to pursue is a closer study of how the percolation model behaves. While the notion of the critical probability allows us to understand the macroscopic behaviour concerning the existence of infinite clusters, more questions arise: when $p > p_c$, is the infinite cluster unique? (\textit{Spoiler alert:} it almost surely is.) When $p = p_c$, does an infinite cluster exist? Kesten \autocite*[42]{kesten_1980} has shown that for bond percolation on $\Z^2$, it is true that $\theta(p) = 0$; it remains an open question whether such is the case for lattices in higher dimensions.
 
-At last, we shall return to the mathematical model itself, whose intricacy is concealed behind its simplistic formulation. Moreover, from the proofs, we saw that it is often difficult to turn our intuition into logic. These ideas are perhaps best summed up in Kesten's words:
+At last, we shall return to the mathematical model itself, whose intricacy is concealed behind its simplistic formulation. Moreover, we saw that the intuitively obvious explanations, in spite of how they may serve as a beacon for formal proofs, are often far from rigorous reasonings. This sheds light on the role of intuition in mathematics, and calls into question whether accepting conclusions that go beyond evidence is required in the production of mathematical knowledge. These ideas are perhaps best summed up in Kesten's words:
 
 \begin{displayquote}
 ``Quite apart from the fact that percolation theory had its origin in an honest applied problem, it is a source of fascinating problems of the best kind a mathematician can wish for: problems which are easy to state with a minimum of preparation, but whose solutions are (apparently) difficult and require new methods.''
