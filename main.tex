@@ -2,6 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{myshortcuts}
 \usepackage{a4wide}
+\usepackage{fancyhdr}
 \usepackage{csquotes}
 \usepackage{etoolbox}
 \usepackage[british]{babel}
@@ -18,6 +19,8 @@ Planar percolation: a seemingly simple model
 }
 \author{}
 \date{}
+
+\pagestyle{fancy}
 
 \begin{document}
 \maketitle
@@ -81,19 +84,16 @@ By \cref{defn:outcome_and_event}, we see that $A$ and $B$ are two sets of outcom
     \Pp(B) 
     &= \Pp(A \cup (B \setminus A))\\
     &= \Pp(A) + \Pp(B \setminus A) - \Pp(A \cap (B \setminus A))\\
-    &\geq \Pp(A)
+    \iff \Pp(B) &- \Pp(A) = \Pp(B \setminus A) - \Pp(A \cap (B \setminus A))
 \end{align*}
-since $A \cap (B \setminus A) = \varnothing$ and $\Pp(B \setminus A) \geq 0$.
+\input{figures/venn}
 
-% TODO venn diagram
-%\begin{figure}
-%    \centering
-%    \begin{tikzpicture}
-%        
-%    \end{tikzpicture}
-%    \caption{test}
-%    \label{fig:subset}
-%\end{figure}
+As shown in \cref{fig:venn} above, we have $A \cap (B \setminus A) = \varnothing$, and as such $\Pp(A \cap (B \setminus A)) = 0$. Then, since $\Pp(B \setminus A) \geq 0$ by definition, 
+\begin{align*}
+\Pp(B) - \Pp(A) &= \Pp(B \setminus A) - 0 \geq 0\\
+\iff \Pp(B) &\geq \Pp(A).
+\end{align*}
+
 \end{proof}
 
 \begin{cor}\label{cor:inf_cluster}
@@ -103,7 +103,12 @@ Using the definition from \cref{ex:cluster_of_size_n}, for integers $m$ and $n$,
 = \lim_{n \to \infty} \Pp(\text{there is a self-avoiding path of open edges of length } n \text{ from } O).
 \]
 \end{cor}
-We also use $\theta(p)$ to refer to $\Pp(\abs{C} = \infty)$, the probability that there is an infinite cluster at the origin, as a function of $p$.
+We also use $\theta(p)$ to refer to $\Pp(\abs{C} = \infty)$, the probability that there is an infinite cluster at the origin, as a function of $p$. Of course, we know that 
+\[\begin{cases}
+    \theta(0) &= 0,\\
+    \theta(1) &= 1;
+\end{cases}\]
+we are more concerned with the behaviour of $\theta(p)$ when $0 < p < 1$.
 
 \pagebreak
 \section{Percolation on the Square Lattice}\label{sec:Z2}
@@ -236,7 +241,7 @@ The geometric series only converges when $\abs{9 (1 - p)^2} < 1$, i.e., when $-\
 
 \input{figures/pc_upper_bound_plot.tex}
 
-As shown in \cref{fig:pc_upper_bound_plot} above, graphically we can determine that for $p > 0.762$, \[\Pp(\abs{C} < \infty) \leq \frac{36(1 - p)^3}{1 - 9(1 - p)^2} < 1.\]
+As shown in \cref{fig:pc_upper_bound_plot} opposite, graphically we can determine that for $p > 0.762$, \[\Pp(\abs{C} < \infty) \leq \frac{36(1 - p)^3}{1 - 9(1 - p)^2} < 1.\]
 
 Note that the event $\{\abs{C} < \infty\}$ is the complement of the event $\{\abs{C} = \infty\}$, and hence
 \[
@@ -245,8 +250,8 @@ Note that the event $\{\abs{C} < \infty\}$ is the complement of the event $\{\ab
 
 We can now conclude that
 \begin{align*}
-    1 - \theta(p) < 1\\
-    \theta(p) > 0
+    1 - \theta(p) &< 1\\
+    \iff \theta(p) &> 0
 \end{align*}
 when $p > 0.762$.
 \end{proof}
@@ -338,5 +343,6 @@ At last, we shall return to the mathematical model itself, whose intricacy is co
 \end{displayquote}
 
 \printbibliography
+\thispagestyle{empty}
 
 \end{document}
