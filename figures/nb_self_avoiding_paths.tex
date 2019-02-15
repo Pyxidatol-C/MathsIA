@@ -1,6 +1,6 @@
 \begin{figure}[!h]
     \centering
-    \caption{Enumeration of self-avoiding paths in $\Z^2$}
+    \caption{Paths in $\Z^2$ 1) of length $1$; 2) of length $k + 1$}
     \label{fig:nb_self_avoiding_path}
     \minipage{0.5\textwidth}
     \centering
@@ -14,13 +14,13 @@
             \draw[gray, dashed] (\i, 1.5) -- (\i, 2.0);
         }
         
-        \filldraw (0, 0) circle (1pt);
+        \filldraw (0, 0) circle (2pt);
         \draw[->, thick] (0, 0) -- (1, 0);
         \draw[->, thick] (0, 0) -- (0, 1);
         \draw[->, thick] (0, 0) -- (-1, 0);
         \draw[->, thick] (0, 0) -- (0, -1);
+        \node[right] at (0.0, 0.25) {$O$};
     \end{tikzpicture}
-    \caption*{$4$ choices for the first step}
     \endminipage\hfill
     % --
     \minipage{0.5\textwidth}
@@ -36,11 +36,13 @@
             \draw[gray, dashed] (\i, 1.5) -- (\i, 2.0);
         }
         
-        \draw[|->, red, dashed, very thick] (0, -1) -- (0, 0);
+        \draw[->, red, dashed, very thick] (0, -1) -- (0, 0);
+        \filldraw[red] (0, -1) circle (2pt);
         \draw[->, thick] (0, 0) -- (1, 0);
         \draw[->, thick] (0, 0) -- (0, 1);
         \draw[->, thick] (0, 0) -- (-1, 0);
+        \node[right] at (0.0, 0.25) {$v_k$};
+        \node[right] at (0.0, -0.75) {$v_{k - 1}$};
     \end{tikzpicture}
-    \caption*{$3$ choices for any step that follows}
     \endminipage
 \end{figure}

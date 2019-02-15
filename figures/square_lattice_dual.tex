@@ -10,7 +10,7 @@
         
         \foreach \i in {0.5, 1.5, ..., 3.5} {
             \foreach \j in {0.5, 1.5, ..., 3.5} {
-                \filldraw[orange] (\i, \j) circle (2.0pt);
+                \filldraw[black] (\i, \j) circle (1.5pt);
             }
         }
         
@@ -45,6 +45,13 @@
         \draw[blue, very thick] (3.5, 4.5) -- (3.5, 3.5);
         \draw[blue, very thick] (3.5, 2.5) -- (3.5, 0.5);
         
+        \node at (2, 2.25) {$(0, 0)$};
+        \filldraw[gray] (2, 2) circle (1.5pt);
+        
+        \node at (1, 3.25) {$(-1, 1)$};
+        \filldraw[gray] (1, 3) circle (1.5pt);
+        \node at (2.05, 3.25) {$(0, 1)$};
+        \filldraw[gray] (2, 3) circle (1.5pt);
     \end{tikzpicture}
     \caption{A percolation realisation on a $5 \times 5$ section of the square lattice and its dual}
     \label{fig:square_lattice_dual}
